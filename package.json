@@ -4,26 +4,37 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^14.2.2",
+    "@testing-library/user-event": "^14.5.2",
     "axios": "^1.6.7",
     "react": "^18.3.1",
+    "react-cookie": "^7.2.2",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.22.3",
-    "react-cookie": "^7.2.2",
-    "@testing-library/react": "^14.2.2",
-    "@testing-library/user-event": "^14.5.2",
-    "@testing-library/jest-dom": "^6.4.2",
+    "sass": "^1.85.1",
     "web-vitals": "^3.5.0"
   },
   "devDependencies": {
-    "react-scripts": "5.0.1",
-    "@babel/plugin-transform-react-jsx": "^7.25.9"
+    "@babel/plugin-transform-react-jsx": "^7.25.9",
+    "@eslint/js": "^9.21.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-react": "^7.37.4",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.2",
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint 'src/**/*.js'",
+    "lint:fix": "eslint 'src/**/*.js' --fix",
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,json,md,yml}'"
   },
   "eslintConfig": {
     "extends": [

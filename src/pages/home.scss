@@ -30,8 +30,10 @@
   align-items: center;
 }
 
+$active-color: #242F9B;
+
 .active {
-  background-color: #242F9B;
+  background-color: $active-color;
   color: #ffffff;
 }
 
