@@ -27,7 +27,7 @@ export const Home = () => {
       .catch((err) => {
         setErrorMessage(`リストの取得に失敗しました。${err}`)
       })
-  }, [])
+  }, [cookies.token])
 
   useEffect(() => {
     const listId = lists[0]?.id
@@ -63,6 +63,48 @@ export const Home = () => {
         setErrorMessage(`タスクの取得に失敗しました。${err}`)
       })
   }
+
+  const handleKeyDown = (e, id) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handleSelectList(id)
+    }
+  }
+
+  //残り時間を計算する関数
+  const calculateRemainingTime = (limit) => {
+    const now = new Date()
+    console.log('now:', now)
+    const limitDate = new Date(limit)
+    console.log('limitDate:', limitDate)
+    const diff = limitDate - now
+
+    if (diff <= 0) return '期限切れ'
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24)
+    const minutes = Math.floor((diff / 1000 / 60) % 60)
+
+    return `${days}日 ${hours}時間 ${minutes}分`
+  }
+
+  //期限についてJSTに合わせて表示する機能
+  const formatToJST = (utcTime) => {
+    if (!utcTime) return "期限なし"; // 期限がない場合
+    console.log("UTC:", utcTime);
+    const utcDate = new Date(utcTime); // UTCのDateオブジェクト作成
+    console.log("UTC Date:", utcDate);
+
+    // JST の "YYYY-MM-DD HH:MM" にフォーマット
+    const formattedDate =
+      utcDate.getFullYear() +
+      "-" + String(utcDate.getMonth() + 1).padStart(2, "0") +
+      "-" + String(utcDate.getDate()).padStart(2, "0") +
+      " " + String(utcDate.getHours()).padStart(2, "0") +
+      ":" + String(utcDate.getMinutes()).padStart(2, "0");
+
+    return formattedDate;
+  }
+
   return (
     <div>
       <Header />
@@ -82,7 +124,7 @@ export const Home = () => {
               </p>
             </div>
           </div>
-          <ul className="list-tab">
+          <ul className="list-tab" role="tablist">
             {lists.map((list, key) => {
               const isActive = list.id === selectListId
               return (
@@ -90,6 +132,10 @@ export const Home = () => {
                   key={key}
                   className={`list-tab-item ${isActive ? 'active' : ''}`}
                   onClick={() => handleSelectList(list.id)}
+                  onKeyDown={(e) => handleKeyDown(e, list.id)}
+                  role="tab"
+                  aria-selected={isActive}
+                  tabIndex={0}
                 >
                   {list.title}
                 </li>
@@ -114,6 +160,8 @@ export const Home = () => {
               tasks={tasks}
               selectListId={selectListId}
               isDoneDisplay={isDoneDisplay}
+              calculateRemainingTime={calculateRemainingTime}
+              formatToJST={formatToJST}
             />
           </div>
         </div>
@@ -124,16 +172,14 @@ export const Home = () => {
 
 // 表示するタスク
 const Tasks = (props) => {
-  const { tasks, selectListId, isDoneDisplay } = props
+  const { tasks, selectListId, isDoneDisplay, calculateRemainingTime, formatToJST } = props
   if (tasks === null) return <></>
 
-  if (isDoneDisplay == 'done') {
+  if (isDoneDisplay === 'done') {
     return (
       <ul>
         {tasks
-          .filter((task) => {
-            return task.done === true
-          })
+          .filter((task) => task.done === true)
           .map((task, key) => (
             <li key={key} className="task-item">
               <Link
@@ -141,6 +187,10 @@ const Tasks = (props) => {
                 className="task-item-link"
               >
                 {task.title}
+                <br />
+                期限:  {formatToJST(task.limit)}
+                <br />
+                残り: {calculateRemainingTime(task.limit)}
                 <br />
                 {task.done ? '完了' : '未完了'}
               </Link>
@@ -153,9 +203,7 @@ const Tasks = (props) => {
   return (
     <ul>
       {tasks
-        .filter((task) => {
-          return task.done === false
-        })
+        .filter((task) => task.done === false)
         .map((task, key) => (
           <li key={key} className="task-item">
             <Link
@@ -163,6 +211,10 @@ const Tasks = (props) => {
               className="task-item-link"
             >
               {task.title}
+              <br />
+              期限: {formatToJST(task.limit)}
+              <br />
+              残り: {calculateRemainingTime(task.limit)}
               <br />
               {task.done ? '完了' : '未完了'}
             </Link>

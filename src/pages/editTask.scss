@@ -38,38 +38,56 @@
   }
 }
 
+// タブレット用スタイル（768px以下）
+@media screen and (max-width: 768px) {
+  .edit-task {
+    width: 80%;
+    margin: 0 auto;
+  }
 
-// .edit-task {
-//   width: 1000px;
-//   margin: 0 auto;
-// }
+  .edit-task-title, 
+  .edit-task-detail,
+  .edit-task-limit {
+    width: 250px; // 幅を少し狭める
+  }
 
-// .edit-task-form {
-//   color: #555555;
-// }
+  .delete-task-button,
+  .edit-task-button {
+    width: 100px; // ボタンを少し大きく
+    height: 45px;
+  }
 
-// .edit-task-title, .edit-task-detail {
-//   width: 300px;
-//   margin-bottom: 25px;
-// }
+  .edit-task-form div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; // ボタンの間隔を調整
+  }
+}
 
-// .delete-task-button {
-//   color: #ff3333;
-//   border: solid 1px #ff3333;
-//   width: 80px;
-//   height: 40px;
-//   margin: 25px 5px;
-//   border-radius: 5px;
-// }
+// スマートフォン用スタイル（320px以下）
+@media screen and (max-width: 320px) {
+  .edit-task {
+    width: 100%;
+    padding: 0 10px;
+  }
 
-// .edit-task-button {
-//   background-color: #242F9B;
-//   color: #ffffff;
-//   width: 80px;
-//   height: 40px;
-//   border-radius: 5px;
-// }
+  .edit-task-title, 
+  .edit-task-detail,
+  .edit-task-limit {
+    width: 100%; // スマホではフォーム幅を最大化
+  }
 
-// .error-message {
-//   color: #ff3333;
-// }
+  .delete-task-button,
+  .edit-task-button {
+    width: 100%; // ボタンを画面幅いっぱいに
+    height: 50px;
+    font-size: 16px;
+    margin: 10px 0;
+  }
+
+  .edit-task-form div {
+    display: flex;
+    flex-direction: column;
+    align-items: center; // スマホではボタンを中央揃え
+  }
+}

@@ -4,6 +4,7 @@
   width: 500px;
   margin: 0 auto;
 }
+
 .signup-form {
   margin: 25px 0;
   color: #555555;
@@ -26,4 +27,43 @@
 
 .error-message {
   color: #ff3333;
+}
+
+// タブレット用スタイル（768px以下）
+@media screen and (max-width: 768px) {
+  .signup {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .email-input, .name-input, .password-input {
+    font-size: medium;
+    height: 35px;
+  }
+
+  .signup-button {
+    width: 120px; // 少し大きく
+    height: 45px;
+  }
+}
+
+// スマートフォン用スタイル（320px以下）
+@media screen and (max-width: 320px) {
+  .signup {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .email-input, .name-input, .password-input {
+    width: 100%; // 入力欄を最大化
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .signup-button {
+    width: 100%; // ボタンを画面幅いっぱいに
+    height: 50px;
+    font-size: 18px;
+    margin-top: 10px;
+  }
 }

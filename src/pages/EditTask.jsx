@@ -12,18 +12,37 @@ export const EditTask = () => {
   const [cookies] = useCookies()
   const [title, setTitle] = useState('')
   const [detail, setDetail] = useState('')
+  const [limit, setLimit] = useState('')//期限を保管する変数の追加
   const [isDone, setIsDone] = useState()
   const [errorMessage, setErrorMessage] = useState('')
   const handleTitleChange = (e) => setTitle(e.target.value)
   const handleDetailChange = (e) => setDetail(e.target.value)
   const handleIsDoneChange = (e) => setIsDone(e.target.value === 'done')
+  const handleLimitChange = (e) => {
+    console.log("ユーザーが選択した日時:", e.target.value); // デバッグ用
+    setLimit(e.target.value); // そのまま保存（変換しない）
+  };
+  
   const onUpdateTask = () => {
-    console.log(isDone)
+
+    const localDate = new Date(limit); // 入力値を Date オブジェクトに変換
+
+    // `YYYY-MM-DDTHH:MM:SSZ` 形式に変換
+    const formattedLimit = localDate.toISOString().slice(0, 19) + "Z";
+    
+    console.log("送信データ:", {
+      title,
+      detail,
+      done: isDone,
+      limit: formattedLimit,
+    });
+
     const data = {
       title: title,
       detail: detail,
       done: isDone,
-    }
+      limit: formattedLimit, // PUTリクエスト用に変換
+    };
 
     axios
       .put(`${url}/lists/${listId}/tasks/${taskId}`, data, {
@@ -67,6 +86,17 @@ export const EditTask = () => {
         setTitle(task.title)
         setDetail(task.detail)
         setIsDone(task.done)
+
+        // limitが "YYYY-MM-DDTHH:MM:SSZ" なので "YYYY-MM-DDTHH:MM" に変換
+        if (task.limit) {
+          const utcDate = new Date(task.limit); // 取得した limit を UTC の Date オブジェクトに変換
+          utcDate.setHours(utcDate.getHours() + 9); // 9時間足して日本時間に変換
+          const formattedLimit = utcDate.toISOString().slice(0, 16); // "YYYY-MM-DDTHH:MM" に変換
+          setLimit(formattedLimit);
+        } else {
+          setLimit("");
+        }
+  
       })
       .catch((err) => {
         setErrorMessage(`タスク情報の取得に失敗しました。${err}`)
@@ -98,6 +128,14 @@ export const EditTask = () => {
             value={detail}
           />
           <br />
+          <label>期限日時</label>
+          <br />
+          <input
+            type="datetime-local"
+            onChange={handleLimitChange}
+            className="edit-task-limit"
+            value={limit}
+          />
           <div>
             <input
               type="radio"

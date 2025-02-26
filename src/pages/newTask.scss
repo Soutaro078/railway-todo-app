@@ -9,7 +9,10 @@
   color: #555555;
 }
 
-.new-task-select-list, .new-task-title, .new-task-detail {
+.new-task-select-list,
+.new-task-title,
+.new-task-detail,
+.new-task-limit {
   width: 300px;
   margin-bottom: 25px;
 }
@@ -28,4 +31,54 @@
 
 .error-message {
   color: #ff3333;
+}
+
+// タブレット用スタイル（768px以下）
+@media screen and (max-width: 768px) {
+  .new-task {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .new-task-select-list,
+  .new-task-title,
+  .new-task-detail,
+  .new-task-limit {
+    width: 250px; // 幅を少し縮小
+  }
+
+  .new-task-detail {
+    height: 150px; // 高さを縮小
+  }
+
+  .new-task-button {
+    width: 100px; // ボタンを少し大きく
+    height: 45px;
+  }
+}
+
+// スマートフォン用スタイル（320px以下）
+@media screen and (max-width: 320px) {
+  .new-task {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .new-task-select-list,
+  .new-task-title,
+  .new-task-detail,
+  .new-task-limit {
+    width: 100%; // 入力欄を最大化
+  }
+
+  .new-task-detail {
+    height: 120px; // 高さをさらに縮小
+  }
+
+  .new-task-button {
+    width: 100%; // ボタンを画面幅いっぱいに
+    height: 50px;
+    font-size: 16px;
+    margin-top: 10px;
+  }
 }

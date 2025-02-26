@@ -11,17 +11,36 @@ export const NewTask = () => {
   const [lists, setLists] = useState([])
   const [title, setTitle] = useState('')
   const [detail, setDetail] = useState('')
+  const [limit, setLimit] = useState('')//期限を保管する変数の追加
   const [errorMessage, setErrorMessage] = useState('')
   const [cookies] = useCookies()
   const navigate = useNavigate()
   const handleTitleChange = (e) => setTitle(e.target.value)
   const handleDetailChange = (e) => setDetail(e.target.value)
+  const handleLimitChange = (e) => setLimit(e.target.value)//入力したデータを変数として保存する
   const handleSelectList = (id) => setSelectListId(id)
   const onCreateTask = () => {
+
+    // `YYYY-MM-DDTHH:MM` を `Date` オブジェクトに変換（ローカル時刻として解釈される）
+    const localDate = new Date(limit);
+
+    // `YYYY-MM-DDTHH:MM:SSZ` に変換
+    const formattedLimit = localDate.toISOString().slice(0, 19) + "Z";
+
+    console.log("APIに送信する日時 (UTC):", formattedLimit);
+
+    console.log("送信データ:", {
+      title,
+      detail,
+      done: false,
+      formattedLimit,
+    });
+
     const data = {
       title: title,
       detail: detail,
       done: false,
+      limit: formattedLimit,//postリクエストにlimitを追加
     }
 
     axios
@@ -88,6 +107,15 @@ export const NewTask = () => {
             type="text"
             onChange={handleDetailChange}
             className="new-task-detail"
+          />
+          <br />
+          {/* 期限入力フォームを追加 */}
+          <label>期限</label>
+          <br />
+          <input
+            type="datetime-local"
+            onChange={handleLimitChange}
+            className="new-task-limit"
           />
           <br />
           <button

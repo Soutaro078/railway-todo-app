@@ -34,3 +34,53 @@
 .error-message {
   color: #ff3333;
 }
+
+// タブレット用スタイル（768px以下）
+@media screen and (max-width: 768px) {
+  .edit-list {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .edit-list-title {
+    width: 250px; // 幅を少し縮小
+  }
+
+  .delete-list-button,
+  .edit-list-button {
+    width: 100px; // ボタンを少し大きく
+    height: 45px;
+  }
+
+  .edit-list-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; // ボタン間隔を調整
+  }
+}
+
+// スマートフォン用スタイル（320px以下）
+@media screen and (max-width: 320px) {
+  .edit-list {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .edit-list-title {
+    width: 100%; // 入力欄を最大化
+  }
+
+  .delete-list-button,
+  .edit-list-button {
+    width: 100%; // ボタンを画面幅いっぱいに
+    height: 50px;
+    font-size: 16px;
+    margin: 10px 0;
+  }
+
+  .edit-list-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; // スマホではボタンを中央揃え
+  }
+}

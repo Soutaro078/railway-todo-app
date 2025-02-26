@@ -76,3 +76,70 @@ $active-color: #242F9B;
 .display-select {
   width: 100%;
 }
+
+// タブレット用スタイル（768px以下）
+@media screen and (max-width: 768px) {
+  .taskList {
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  .list-tab {
+    flex-wrap: wrap; // タブを折り返し可能にする
+    justify-content: center;
+  }
+
+  .list-tab-item {
+    width: auto;
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  .tasks-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .task-item {
+    font-size: medium;
+    padding-left: 15px;
+  }
+}
+
+// スマートフォン専用のスタイル（320px以下）
+@media screen and (max-width: 320px) {
+  .taskList {
+    width: 100%; // スマホは全幅
+    padding: 0 10px;
+  }
+
+  .list-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .list-menu {
+    text-align: center;
+  }
+
+  .list-tab {
+    flex-direction: column; // タブを縦並びにする
+    align-items: center;
+  }
+
+  .list-tab-item {
+    width: 80px;
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  .tasks-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .task-item {
+    font-size: small;
+    padding-left: 10px;
+  }
+}

@@ -21,3 +21,39 @@
   height: 40px;
   border-radius: 5px;
 }
+
+// タブレット用スタイル（768px以下）
+@media screen and (max-width: 768px) {
+  .new-list {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .new-list-title {
+    width: 250px; // 幅を少し縮小
+  }
+
+  .new-list-button {
+    width: 100px; // ボタンを少し大きく
+    height: 45px;
+  }
+}
+
+// スマートフォン用スタイル（320px以下）
+@media screen and (max-width: 320px) {
+  .new-list {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .new-list-title {
+    width: 100%; // 入力欄を最大化
+  }
+
+  .new-list-button {
+    width: 100%; // ボタンを画面幅いっぱいに
+    height: 50px;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+}

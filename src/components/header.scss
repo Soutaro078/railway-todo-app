@@ -7,9 +7,52 @@
   color: #ffffff;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
 }
 
 .sign-out-button {
   color: #ffffff;
-  margin: auto 25px auto auto;
+  margin-right: 25px;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+// タブレット用スタイル（768px以下）
+@media screen and (max-width: 768px) {
+  .header {
+    height: 70px; // 高さを縮小
+    padding: 0 15px;
+  }
+
+  .header h1 {
+    font-size: 22px; // 少し小さく
+  }
+
+  .sign-out-button {
+    font-size: 14px; // フォントサイズ調整
+    padding: 8px 12px;
+    margin-right: 15px;
+  }
+}
+
+// スマートフォン用スタイル（320px以下）
+@media screen and (max-width: 320px) {
+  .header {
+    height: 60px; // 高さをさらに縮小
+    padding: 0 10px;
+  }
+
+  .header h1 {
+    font-size: 18px; // フォントサイズ調整
+  }
+
+  .sign-out-button {
+    font-size: 14px;
+    padding: 6px 10px; // タップしやすく調整
+    margin-right: 10px;
+  }
 }
