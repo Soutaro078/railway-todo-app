@@ -87,7 +87,7 @@ export const Home = () => {
     return `${days}日 ${hours}時間 ${minutes}分`
   }
 
-  //期限についてJSTに合わせて表示する機能
+  //期限について日本標準時に合わせて表示する機能
   const formatToJST = (utcTime) => {
     if (!utcTime) return "期限なし"; // 期限がない場合
     console.log("UTC:", utcTime);
@@ -135,7 +135,7 @@ export const Home = () => {
                   onKeyDown={(e) => handleKeyDown(e, list.id)}
                   role="tab"
                   aria-selected={isActive}
-                  tabIndex={0}
+                  tabIndex={0 }
                 >
                   {list.title}
                 </li>

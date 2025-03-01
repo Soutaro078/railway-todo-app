@@ -11,7 +11,7 @@ export const NewTask = () => {
   const [lists, setLists] = useState([])
   const [title, setTitle] = useState('')
   const [detail, setDetail] = useState('')
-  const [limit, setLimit] = useState('')//期限を保管する変数の追加
+  const [limit, setLimit] = useState('')//期限を状態として保存する変数の追加
   const [errorMessage, setErrorMessage] = useState('')
   const [cookies] = useCookies()
   const navigate = useNavigate()
